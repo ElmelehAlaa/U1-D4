@@ -1,13 +1,13 @@
 package entities;
 
-public  class  Dipendente {
+public  class   Dipendente {
     public static double stipendioBase =1000.0;
     private int matricola;
     private double stipendio;
-    private double importoOrarioStraordinario;
+    private int straordinario;
     private Livello livello;
     private Dipartimento dipartimento;
-    private double importoOrarioStaordinario;
+    private int importoOrarioStaordinario;
 
     public enum Livello {
         OPERAIO, IMPIEGATO, QUADRO, DIRIGENTE
@@ -29,15 +29,13 @@ public  class  Dipendente {
         return stipendio;
     }
 
-    public double getImportoOrarioStaordinario() {
-        return importoOrarioStaordinario;
-    }
+
     public Livello getLivello() {
         return livello;
     }
-    public void setImportoOrarioStaordinario(double importoOrarioStaordinario) {
-        this.importoOrarioStaordinario = importoOrarioStaordinario;
-    }
+//    public void setImportoOrarioStaordinario(int importoOrarioStaordinario) {
+//        this.importoOrarioStaordinario = importoOrarioStaordinario;
+//    }
     public void setDipartimento(Dipartimento dipartimento) {
         this.dipartimento = dipartimento;
     }
@@ -46,25 +44,28 @@ public  class  Dipendente {
     }
     ////////////////////////// 2 Costruttori///////////////////////////////
 
-    public Dipendente(int matricola, Dipartimento dipartimento) {
-        this.matricola = matricola;
-        this.stipendio = stipendioBase;
-        this.importoOrarioStraordinario = 30.0;
-        this.livello = Livello.OPERAIO;
-        this.dipartimento = dipartimento;
-    }
-    public Dipendente(int matricola, double stipendio, double importoOrarioStraordinario, Livello livello, Dipartimento dipartimento) {
+//    public Dipendente(int matricola, Dipartimento dipartimento) {
+//        this.matricola = matricola;
+//        this.stipendio = stipendioBase;
+//        this.importoOrarioStraordinario = 30.0;
+//        this.livello = Livello.OPERAIO;
+//        this.dipartimento = dipartimento;
+//    }
+    public Dipendente(int matricola, double stipendio, int straordinario, Livello livello, Dipartimento dipartimento) {
         this.matricola = matricola;
         this.stipendio = stipendio;
-        this.importoOrarioStraordinario = importoOrarioStraordinario;
+        this.straordinario = straordinario;
         this.livello = livello;
         this.dipartimento = dipartimento;}
+    public int getImportoOrarioStaordinario() {
+        return straordinario;
+    }
 
     ///////////////////////METODI///////////////////////////////////
     public void stampaDatiDipendente() {
         System.out.println("Matricola: " + matricola);
         System.out.println("Stipendio: " + stipendio);
-        System.out.println("Importo Orario Straordinario: " + importoOrarioStraordinario);
+        System.out.println("Importo Orario Straordinario: " + straordinario);
         System.out.println("Livello: " + livello);
         System.out.println("Dipartimento: " + dipartimento);
     }
@@ -95,9 +96,11 @@ public  class  Dipendente {
         return dipendente.getStipendio();
 
     }
-    public static double calcolaPagaExtra(Dipendente dipendente, int orarioStaordinario) {
-        double importoOrarioStraordinarioDipendete = dipendente.getImportoOrarioStaordinario();
-        return dipendente.getStipendio() +  (importoOrarioStraordinarioDipendete * orarioStaordinario);
+    public static double calcolaPagaTotale(Dipendente dipendente, int orarioStaordinario) {
+        double stipendio = dipendente.getStipendio();
+        double importoOrarioStraordinario = dipendente.getImportoOrarioStaordinario();
+        return stipendio+ (orarioStaordinario * importoOrarioStraordinario);
+
 
     }
 
